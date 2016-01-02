@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Data Records</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script th:src="@{/js/alerts.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div id = "alert_placeholder"></div>
+
+<form>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" th:value="${dataRecord.name}" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" id="description" th:text="${dataRecord.description}"> </textarea>
+    </div>
+
+    <button class="btn btn-success">Submit</button>
+
+</form>
+
+<br />
+
+<button class="btn btn-default" onclick="history.go(-1);">Back</button>
+
+<script type="text/javascript">
+
+    window.onpageshow = function(evt) {
+        // If persisted then it is in the page cache, force a reload of the page.
+        if (evt.persisted) {
+            document.body.style.display = "none";
+            location.reload();
+        }
+    };
+
+    $('form').submit(function(e) {
+
+        e.preventDefault();
+
+        var data = {
+            name: $("#name").val(),
+            description: $("#description").val()
+        };
+
+        $.ajax({
+            url: $(location).attr('href'),
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            processData: false,
+            type: 'PUT',
+            success: function (data) {
+                bootstrap_alert.success('Data updated successfully!');
+            },
+            error: function (data) {
+                bootstrap_alert.error('Data not updated: ' + data.responseJSON.message);
+            }
+        });
+    });
+
+
+
+</script>
+
+</body>
+</html>

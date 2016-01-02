@@ -1,0 +1,30 @@
+Vagrant.configure(2) do |config|
+	
+	# Allows the virtual machine to use 2 CPU cores and 1 GB of memory
+	config.vm.provider "virtualbox" do |v|
+		v.cpus = 2
+		v.memory = 1024
+	end
+	
+	# Use Debian Jessie 64 bit build
+	config.vm.box = "debian/jessie64"
+	
+	# Set additional private network with IP 192.168.26.27
+	# Forward port 80 on guest to port 8080 on guest
+	config.vm.network "private_network", ip: "192.168.26.27"
+	config.vm.network "forwarded_port", guest: 80, host: 8080
+	config.vm.network "forwarded_port", guest: 27017, host: 27017
+	
+	# Set virtual machine hostname to dezsys07.tast.weim
+	config.vm.hostname = "dezsys07.tast.weim"
+	
+	# Disables default . (host) -> /vagrant (guest) share
+	# Creates new share (host) -> /home/vagrant/dump (guest) share
+	config.vm.synced_folder ".", "/vagrant", disabled: true
+	config.vm.synced_folder "share", "/home/vagrant/dump", create: true
+	
+	# Sets and runs the provision script which updates the virtual machine and installs MongoDB in it.
+	config.vm.provision "shell" do |shell|
+		shell.path = "shell/setup.sh"
+	end
+end

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Data Records</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script th:src="@{/js/alerts.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="page-header">
+    <h1>Datarecords <small>use search bar for filtering</small></h1>
+</div>
+
+<div id = "alert_placeholder"></div>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <form class="form-inline" role="search" method="get">
+            <div class="form-group">
+                <span th:switch="${param.name}">
+                    <span th:case="null"><!--suppress XmlDuplicatedId -->
+                        <input type="text" id="search" name="name" class="form-control" placeholder="Search" /></span>
+                    <span th:case="*"><!--suppress XmlDuplicatedId -->
+                        <input type="text" id="search" name="name" class="form-control" placeholder="Search" th:value="${param.name[0]}" /></span>
+                </span>
+                <button type="submit" class="btn btn-primary">search</button>
+                <input type="button" class="btn btn-default" value="reset" onclick="resetSearch()"/>
+            </div>
+            <input type="button" class="btn btn-success pull-right" value="create new record" onclick="createRecord()"/>
+        </form>
+    </div>
+
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <th:block th:each="dataRecord : ${dataRecords}">
+                <tr th:id="${dataRecord.id}">
+                    <td th:text="${dataRecord.name}"></td>
+                    <td th:text="${dataRecord.description}"></td>
+                    <td><input type="button" class="btn btn-default" value="edit" th:onclick="'editRecord(\'' + ${dataRecord.id} + '\');'"/></td>
+                    <td><input type="button" class="btn btn-danger" value="remove" th:onclick="'removeRecord(\'' + ${dataRecord.id} + '\');'"/></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    window.onpageshow = function(evt) {
+        // If persisted then it is in the page cache, force a reload of the page.
+        if (evt.persisted) {
+            document.body.style.display = "none";
+            location.reload();
+        }
+    };
+
+    function resetSearch() {
+        window.location.href = "/datarecords";
+    }
+
+    function editRecord(id) {
+        window.location.href = "/datarecords/" + id;
+    }
+
+    function createRecord() {
+        window.location.href = "/datarecords/create";
+    }
+
+    function removeRecord(id) {
+        $.ajax({
+            url: "/datarecords/" + id,
+            contentType: "application/json",
+            processData: false,
+            type: 'DELETE',
+            success: function (data) {
+                bootstrap_alert.success('Deleted data successfully!');
+                $("#" + id).hide();
+            },
+            error: function (data) {
+                bootstrap_alert.error('Data not deleted: '  + data.responseJSON.message);
+            }
+        });
+    }
+
+
+
+</script>
+
+
+</body>
+</html>
