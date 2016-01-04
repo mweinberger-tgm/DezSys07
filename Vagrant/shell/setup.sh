@@ -76,11 +76,10 @@ cd /home/vagrant/dump/
 tar -xvjf records.tar.bz2
 
 # Drop database
-#mongo kd --eval "db.dataRecord.drop()"
-mongo kd --eval "db.dropDatabase()"
+mongo iknowsystems --eval "db.dropDatabase()"
 
 # Insert 1 million records
-mongoimport --db kd --collection dataRecord --type json --file /home/vagrant/dump/records.json --jsonArray
+mongoimport --db iknowsystems --collection data --type json --file /home/vagrant/dump/iknowsystems.json --jsonArray
 
 echo ""
 echo "############################################################"
