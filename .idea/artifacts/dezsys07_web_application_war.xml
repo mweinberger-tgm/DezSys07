@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="dezsys07-web-application:war">
-    <output-path>$PROJECT_DIR$/web-application/target</output-path>
-    <root id="archive" name="dezsys07-web-application-1.0.war">
-      <element id="artifact" artifact-name="dezsys07-web-application:war exploded" />
-    </root>
-  </artifact>
-</component>
