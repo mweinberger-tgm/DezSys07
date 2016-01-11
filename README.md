@@ -42,3 +42,5 @@ http://axis.apache.org/axis2/java/core/
 
 IBM Article: Java Web services - JAXB and JAX-WS in Axis2:
 http://www.ibm.com/developerworks/java/library/j-jws8/index.html
+
+> Take a REST, as a friend, as an old memoria
