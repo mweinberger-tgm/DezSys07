@@ -101,13 +101,45 @@ Als Beispiel: \\
 "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." \\
 
 \section{Überlegungen zur optimierten Suche}
+Cachefile verwenden
+In Cachefile drinnen: 
+Alle Wörter aller Einträge genau 1x drinnen, jedes Wort enthält Index bzw. Vermerk über Eintrag, in dem es vorkommt
+-> Anzahl und Länge auch gleich irgendwo mitspeichern?
+
+\subsection{}
+Stur durch und "Cachefile" immer neu generieren
+
+\subsection{}
+Stur durch und "Cachefile" entsprechend aktualisieren bzw. neue Datensätze ergänzen
+
+\subsection{}
+Über Boolean Parameter (-> Trigger) checken, welche Datensätze neu sind und nur diese dem "Cachefile" hinzufügen
+
+\subsection{}
+Stur alles ausgeben, wo Wort mindestens 1x vorkommt
+
+\subsection{}
+Alles ausgeben, wo Wort mindestens 1x vorkommt, nach absoluter Häufigkeit des Wortes im Text geordnet (-> Anzahl des gesuchten Wortes im Text ermitteln)
+
+
+\subsection{}
+Alles ausgeben, wo Wort mindestens 1x vorkommt, nach absoluter Häufigkeit des Wortes im Text geordnet (Anzahl des gesuchten Wortes im Text / Anzahl aller Wörter im Text)
+
+\subsection{}
+Alles nach Datum (auf- oder absteigend) sortieren
+
+\section{Vagrant-VM}
+Eine Vagrant-VM wurde bereits aufgesetzt, MongoDB wartet mit Datensätzen bestückt auf Zugriffe.
+
+\section{Beschreibung Datentransfer mit SOAP}
+SOAP ist ein standardisiertes Verpackungsprotokoll für Nachrichten, welche zwischen Anwendungen ausgetauscht werden. Die Spezifikation definiert einen XML-Basierten Umschlag (Envelope) für die zu übertragenden Informationen sowie Regeln für die Umsetzung von Anwendungs- und Plattformspezifischen Datentypen in XML Darstellungen.
 
 \newpage
 
 
-\bibliographystyle{unsrt}
-\bibliography{references}
+%\bibliographystyle{unsrt}
+%\bibliography{references}
 \lstlistoflistings
-\listoffigures
+%\listoffigures
 
 \end{document}
