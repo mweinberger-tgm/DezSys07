@@ -1,0 +1,113 @@
+\documentclass[letterpaper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINITIONS
+% Change those informations
+% If you need umlauts you have to escape them, e.g. for an ü you have to write \"u
+\gdef\mytitle{Laborprotokoll}
+\gdef\mythema{DezSys07 -  SOA und RESTful Webservices}
+
+\gdef\mysubject{Systemtechnik Labor}
+\gdef\mycourse{5BHIT 2015/16, Gruppe Z}
+\gdef\myauthor{Michael Weinberger und Thomas Taschner}
+
+\gdef\myversion{1.0}
+\gdef\mybegin{04. Dezember 2015}
+\gdef\myfinish{07. Januar 2015}
+
+\gdef\mygrade{Note:}
+\gdef\myteacher{Betreuer: Borko/Micheler}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input special/preamble.tex
+
+\let\tempsection\section
+\renewcommand\section[1]{\vspace{-0.3cm}\tempsection{#1}\vspace{-0.3cm}}
+\WithSuffix\newcommand\section*[1]{\tempsection*{#1}}
+
+\let\tempsubsection\subsection
+\renewcommand\subsection[1]{\vspace{0cm}\tempsubsection{#1}\vspace{0cm}}
+
+\let\tempsubsubsection\subsubsection
+\renewcommand\subsubsection[1]{\vspace{0cm}\tempsubsubsection{#1}\vspace{0cm}}
+
+\linespread{0.94}
+
+\lhead{\mysubject}
+\chead{}
+\rhead{\bfseries\mythema}
+\lfoot{\mycourse}
+\cfoot{\thepage}
+% Creative Commons license BY
+% http://creativecommons.org/licenses/?lang=de
+\rfoot{\ccby\hspace{2mm}\myauthor}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+\parindent 0pt
+\parskip 6pt
+
+\pagenumbering{Roman} 
+\input{special/title}
+
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+%\vspace{-0.5cm}
+\section{Aufgabenstellung}
+Das neu eröffnete Unternehmen iKnow Systems ist spezialisiert auf Knowledgemanagement und bietet seinen Kunden die Möglichkeiten Daten und Informationen jeglicher Art in eine Wissensbasis einzupflegen und anschließend in der zentralen Wissensbasis nach Informationen zu suchen (ähnlich Wikipedia). \\
+Folgendes ist im Rahmen der Aufgabenstellung verlangt:
+\begin{itemize}
+	\item Entwerfen Sie ein Datenmodell, um die Eintraege der Wissensbasis zu speichern und um ein optimitiertes Suchen von Eintraegen zu gewaehrleisten. [2Pkt]
+	\item Entwickeln Sie mittels RESTful Webservices eine Schnittstelle, um die Wissensbasis zu verwalten. Es muessen folgende Operationen angeboten werden: \\
+	- Hinzufuegen eines neuen Eintrags \\
+	- Aendern eines bestehenden Eintrags \\
+	- Loeschen eines bestehenden Eintrags \\
+	Alle Operationen muessen ein Ergebnis der Operation zurueckliefern. [3Pkt]
+	\item Entwickeln Sie in Java ein SOA Webservice, dass die Funktionalitaet Suchen anbietet und das SOAP Protokoll einbindet. Erzeugen Sie fuer dieses Webservice auch eine WSDL-Datei. [3Pkt]
+	\item Entwerfen Sie eine Weboberflaeche, um die RESTful Webservices zu verwenden. [3Pkt]
+	\item Implementieren Sie einen einfachen Client mit einem User Interface (auch Commandline UI moeglich), der das SOA Webservice aufruft. [2Pkt] \\
+	\item Dokumentieren Sie im weiteren Verlauf den Datentransfer mit SOAP. [1Pkt] \\
+	\item Protokoll ist erforderlich! [2Pkt] \\
+\end{itemize}
+Info: \\
+Gruppengroesse: 2 Mitglieder \\
+Punkte: 16 \\
+
+Zum Testen bereiten Sie eine Routine vor, um die Wissensbasis mit einer 1 Million Datensaetze zu fuellen. Die Datensaetze sollen mindestens eine Laenge beim Suchbegriff von 10 Zeichen und bei der Beschreibung von 100 Zeichen haben! Ist die Performance bei der Suche noch gegeben?
+
+\newpage
+\section{Gewähltes Datenmodell}
+\begin{lstlisting}[frame=single, language=bash, caption=Datenmodell]
+"cols": [
+		"id",
+		"name",
+		"tags",
+		"text"
+]
+\end{lstlisting} 
+Als Beispiel: \\
+
+"id": "8A2D12DD-B63A-F5CA-6190-AFAD0B589B9E", (eindeutige ID) \\
+"name": "Nec Tempus Scelerisque PC", (Firma zB) \\
+"tags": "suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in", \\
+"text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." \\
+
+\section{Überlegungen zur optimierten Suche}
+
+\newpage
+
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\lstlistoflistings
+\listoffigures
+
+\end{document}
